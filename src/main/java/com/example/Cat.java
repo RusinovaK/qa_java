@@ -6,8 +6,10 @@ public class Cat {
 
     Predator predator;
 
-    public Cat(Feline feline) {
-        this.predator = feline;
+    public Cat(Predator predator) {
+        this.predator = predator;
+    }
+    public Cat(){
     }
 
     public String getSound() {
@@ -17,5 +19,4 @@ public class Cat {
     public List<String> getFood() throws Exception {
         return predator.eatMeat();
     }
-
 }
