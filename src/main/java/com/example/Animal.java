@@ -2,9 +2,8 @@ package com.example;
 
 import java.util.List;
 
-public abstract class Animal implements Beast {
+public class Animal {
 
-    @Override
     public List<String> getFood(String animalKind) throws Exception {
         if ("Травоядное".equals(animalKind)) {
             return List.of("Трава", "Различные растения");

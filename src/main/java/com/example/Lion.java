@@ -4,8 +4,12 @@ import java.util.List;
 
 public class Lion {
 
+    Feline feline;
     boolean hasMane;
-    private Beast beast;
+
+    public Lion(Feline feline){
+        this.feline = feline;
+    }
 
     public Lion(String sex) throws Exception {
         if ("Самец".equals(sex)) {
@@ -16,12 +20,9 @@ public class Lion {
             throw new Exception("Используйте допустимые значения пола животного - самец или самка");
         }
     }
-    public Lion(Beast beast){
-        this.beast = beast;
-    }
 
     public int getKittens() {
-        return beast.getKittens();
+        return feline.getKittens();
     }
 
     public boolean doesHaveMane() {
@@ -29,6 +30,6 @@ public class Lion {
     }
 
     public List<String> getFood() throws Exception {
-        return beast.getFood("Хищник");
+        return feline.getFood("Хищник");
     }
 }

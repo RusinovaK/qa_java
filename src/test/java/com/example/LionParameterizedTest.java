@@ -20,25 +20,14 @@ public class LionParameterizedTest {
     public static Object[][] getParam() {
         return new Object[][]{
                 {"Самец", true},
-                {"Самка", false},
-                {"Не определено", true}
+                {"Самка", false}
         };
     }
 
     @Test
     public void checkIfSexParamThenHasManeParam() throws Exception {
-        if(sex.equals("Самец") || sex.equals("Самка")){
             Lion lion = new Lion(sex);
             boolean actual = lion.hasMane;
             Assert.assertEquals(expected, actual);
-        } else {
-            boolean thrown = false;
-            try {
-                Lion lion = new Lion("Не определено");
-            } catch (Exception e) {
-                thrown = true;
-            }
-            Assert.assertEquals(expected, thrown);
-        }
     }
 }

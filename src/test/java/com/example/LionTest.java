@@ -11,6 +11,16 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
 
+    @Test
+    public void checkExceptionWhenInvalidParam() {
+        try {
+            Lion lion = new Lion("Не определено");
+            Assert.fail("Exception not thrown");
+        } catch (Exception e) {
+            Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", e.getMessage());
+        }
+    }
+
     @Mock
     Feline stabFeline;
     @Test
@@ -32,14 +42,11 @@ public class LionTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Mock
-    Animal stabAnimal;
-
     @Test
     public void shouldGetFood() throws Exception {
-        Lion lion = new Lion(stabAnimal);
-        Mockito.when(stabAnimal.getFood(Mockito.anyString())).thenReturn(List.of("Животные", "Птицы", "Рыба"));
-        stabAnimal.getFood("Хищник");
+        Lion lion = new Lion(stabFeline);
+        Mockito.when(stabFeline.getFood(Mockito.anyString())).thenReturn(List.of("Животные", "Птицы", "Рыба"));
+        stabFeline.getFood("Хищник");
         List<String> actual = lion.getFood();
         List<String> expected = List.of("Животные", "Птицы", "Рыба");
 

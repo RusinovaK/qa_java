@@ -2,27 +2,21 @@ package com.example;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
 
-    @Mock
-    Animal stabAnimal;
-    @Test
-    public void getFoodWhenKindPredator() throws Exception {
-        Feline feline = new Feline(stabAnimal);
-        Mockito.when(stabAnimal.getFood(Mockito.anyString())).thenReturn(List.of("Животные", "Птицы", "Рыба"));
-        stabAnimal.getFood("Хищник");
-        List<String> actual = feline.eatMeat();
-        List<String> expected = List.of("Животные", "Птицы", "Рыба");
+    @Spy
+    private Feline spyFeline;
 
-        Assert.assertEquals(expected, actual);
+    @Test
+    public void eatMeatNoParamInvokeGetFoodWithParamPredator() throws Exception {
+        spyFeline.eatMeat();
+        Mockito.verify(spyFeline, Mockito.times(1)).getFood("Хищник");
     }
 
     @Test
@@ -34,12 +28,10 @@ public class FelineTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Spy
-    private Feline feline;
     @Test
     public void getKittensNoParamInvokeGetKittensWith1() {
-        feline.getKittens();
-        Mockito.verify(feline, Mockito.times(1)).getKittens(1);
+        spyFeline.getKittens();
+        Mockito.verify(spyFeline, Mockito.times(1)).getKittens(1);
     }
 
     @Test
