@@ -14,7 +14,8 @@ public class LionTest {
     @Test
     public void checkExceptionWhenInvalidParam() {
         try {
-            Lion lion = new Lion("Не определено");
+            Feline feline = new Feline();
+            Lion lion = new Lion("Не определено", feline);
             Assert.fail("Exception not thrown");
         } catch (Exception e) {
             Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", e.getMessage());
@@ -24,8 +25,8 @@ public class LionTest {
     @Mock
     Feline stabFeline;
     @Test
-    public void getKittensWhenOneKitten() {
-        Lion lion = new Lion(stabFeline);
+    public void getKittensWhenOneKitten() throws Exception {
+        Lion lion = new Lion("Самец", stabFeline);
         Mockito.when(stabFeline.getKittens()).thenReturn(1);
         int actual = lion.getKittens();
         int expected = 1;
@@ -35,7 +36,8 @@ public class LionTest {
 
     @Test
     public void shouldDoesHaveMane() throws Exception {
-        Lion lion = new Lion("Самец");
+        Feline feline = new Feline();
+        Lion lion = new Lion("Самец", feline);
         boolean actual = lion.doesHaveMane();
         boolean expected = true;
 
@@ -44,7 +46,7 @@ public class LionTest {
 
     @Test
     public void shouldGetFood() throws Exception {
-        Lion lion = new Lion(stabFeline);
+        Lion lion = new Lion("Самец", stabFeline);
         Mockito.when(stabFeline.getFood(Mockito.anyString())).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         stabFeline.getFood("Хищник");
         List<String> actual = lion.getFood();
